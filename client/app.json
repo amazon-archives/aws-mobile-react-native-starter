@@ -1,0 +1,7 @@
+{
+  "expo": {
+    "sdkVersion": "18.0.0"
+  },
+  "name": "awsmobilereactnativesample",
+  "displayName": "AWS Mobile React Native Starter"
+}

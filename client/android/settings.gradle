@@ -1,0 +1,9 @@
+rootProject.name = 'awsmobilereactnativesample'
+include ':react-native-fetch-blob'
+project(':react-native-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fetch-blob/android')
+include ':react-native-aws-cognito-js'
+project(':react-native-aws-cognito-js').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-aws-cognito-js/android')
+include ':react-native-vector-icons'
+project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
+
+include ':app'

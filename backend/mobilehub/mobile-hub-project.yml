@@ -1,0 +1,81 @@
+--- !com.amazonaws.mobilehub.v0.Project
+uploads:
+  - !com.amazonaws.mobilehub.v0.Upload
+    fileName: crud-lambda.zip
+    targetS3Bucket: deployments
+features:
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic
+    components:
+      Pets: !com.amazonaws.mobilehub.v0.API
+        attributes:
+          name: Pets
+          requires-signin: true
+          sdk-generation-stage-name: Development
+        paths:
+          /items: !com.amazonaws.mobilehub.v0.Function
+            description: "Handler for calls to resource path : /items/{proxy+}"
+            environment:  {}
+            handler: index.handler
+            codeFilename: uploads/crud-lambda.zip
+            memorySize: "128"
+            name: itemsHandler
+            runtime: nodejs6.10
+            timeout: "3"
+          "/items/{proxy+}": !com.amazonaws.mobilehub.v0.Function
+            description: "Handler for calls to resource path : /items/{proxy+}"
+            environment:  {}
+            handler: index.handler
+            codeFilename: uploads/crud-lambda.zip
+            memorySize: "128"
+            name: itemsHandler
+            runtime: nodejs6.10
+            timeout: "3"
+  content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery
+    attributes:
+      enabled: true
+      visibility: public-global
+    components:
+      release: !com.amazonaws.mobilehub.v0.Bucket {}
+  database: !com.amazonaws.mobilehub.v0.Database
+    components:
+      database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase
+        tables:
+          - !com.amazonaws.mobilehub.v0.NoSQLTable
+            attributes:
+              petId: S
+              userId: S
+            hashKeyName: userId
+            hashKeyType: S
+            rangeKeyName: petId
+            rangeKeyType: S
+            tableName: ___DYNAMIC_PREFIX___-pets
+            tablePrivacy: protected
+  mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint
+    components:
+      analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
+  sign-in: !com.amazonaws.mobilehub.v0.SignIn
+    attributes:
+      enabled: true
+      optional-sign-in: true
+    components:
+      sign-in-user-pools: !com.amazonaws.mobilehub.v0.UserPoolsIdentityProvider
+        attributes:
+          alias-attributes:
+            - preferred_username
+            - phone_number
+          mfa-configuration: ON
+          name: userpool
+          password-policy: !com.amazonaws.mobilehub.ConvertibleMap
+            min-length: "8"
+            require-lower-case: true
+            require-numbers: true
+            require-symbols: true
+            require-upper-case: true
+  user-files: !com.amazonaws.mobilehub.v0.UserFiles
+    attributes:
+      enabled: true
+  user-profiles: !com.amazonaws.mobilehub.v0.UserSettings
+    attributes:
+      enabled: true
+name: manuel-react-native
+region: us-east-1

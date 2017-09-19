@@ -1,0 +1,22 @@
+{
+  "name": "crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-lambda": "lambda-build -f . -a ../crud-lambda.zip"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "aws-sdk": "^2.94.0",
+    "aws-serverless-express": "^3.0.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "node-uuid": "^1.4.8"
+  },
+  "devDependencies": {
+    "aws-lambda-build": "^1.0.7"
+  }
+}

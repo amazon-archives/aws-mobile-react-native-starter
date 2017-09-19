@@ -1,0 +1,17 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-lambdas": "cd lambdas/crud && npm install && npm run build-lambda",
+    "build-hub-import": "cd mobilehub && mkdir ../import_mobilehub && bestzip ../import_mobilehub/reactnative-starter.zip . ../lambdas/*.zip",
+    "build-backend": "npm run build-lambdas && npm run build-hub-import"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "bestzip": "^1.1.4"
+  }
+}
