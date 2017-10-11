@@ -21,6 +21,8 @@ AWS Services used:
 * AWS Lambda
 * Amazon DynamoDB
 * Amazon S3
+* Amazon Pinpoint
+* Amazon Mobile Analytics
 * AWS Mobile Hub
 
 ## Prerequisites
@@ -98,7 +100,7 @@ First clone this repo: `git clone https://github.com/awslabs/aws-mobile-react-na
 
 ## Use features in your app.
 
-This starter app includes a set of libraries (under `client/lib`) to help you integrate features into your own React Native app. These libraries include helpers, React [Higher Order Components](https://facebook.github.io/react/docs/higher-order-components.html) that you can use to easily add capabilities for Sign-Up, Sign-In or API Access with basic reusable React Components through `Auth`, `API` and `Storage` HOCs.
+This starter app includes a set of libraries (under `client/lib`) to help you integrate features into your own React Native app. These libraries include helpers, React [Higher Order Components](https://facebook.github.io/react/docs/higher-order-components.html) that you can use to easily add capabilities for Sign-Up, Sign-In or API Access with basic reusable React Components through `Auth`, `API`, `Analytics` and `Storage` HOCs.
 
 You will need [Create React Native App](https://github.com/react-community/create-react-native-app) for the next sections.
 
@@ -134,7 +136,7 @@ import { WithAuth } from './lib/Categories/Auth/Components';
 
 This HOC will add a prop called `session` to your component as well as a method called `doSignOut()`. There is also a wrapper class called `Auth` as part of this which is a helper for common Sign-Up and Sign-In activities. We'll show you how to use the `session` and `doSignOut()` capabilities next.
 
-6. Edit your App component to transform it into one that suports `Auth`  
+6. Edit your App component to transform it into one that supports `Auth`  
 ```javascript
 export default WithAuth(class App extends React.Component {
   // ...
@@ -195,7 +197,7 @@ import awsmobile from './aws-exports';
 import { WithAPI } from './lib/Categories/API/Components';
 ```
 
-4. Edit your App component to transform it into one that suports `API`  
+4. Edit your App component to transform it into one that supports `API`  
 ```javascript
 export default WithAPI(WithAuth(class App extends React.Component {
   // ...
@@ -309,7 +311,7 @@ import { WithStorage } from './lib/Categories/Storage/Components';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 ```
 
-8. Edit your App component to transform it into one that suports `Storage`  
+8. Edit your App component to transform it into one that supports `Storage`  
 ```javascript
 export default WithStorage(WithAuth(class App extends React.Component {
   // ...

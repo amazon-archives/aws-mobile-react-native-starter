@@ -44,14 +44,14 @@ class Splash extends React.Component {
     try {
       await new Promise(async (resolve, reject) => setTimeout(() => {
         if (!session) {
-          reject('No current session');
+          reject('No current session.');
           return;
         }
 
         resolve();
       }, 3000));
     } catch (exception) {
-      console.log('rejected', exception);
+      console.log('Splash screen, error', exception);
     }
 
     const loggedIn = session && session.isValid();

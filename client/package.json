@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.97.0",
+    "aws-sdk-mobile-analytics": "^0.9.2",
     "aws4-react-native": "^0.0.2",
     "axios": "^0.16.2",
     "buffer": "^5.0.7",

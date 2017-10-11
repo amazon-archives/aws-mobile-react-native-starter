@@ -15,6 +15,7 @@ global.Buffer = global.Buffer || require('buffer').Buffer; // Required for aws s
 import React from 'react';
 import { DrawerNavigator } from 'react-navigation';
 
+import { WithAnalytics } from './lib/Categories/Analytics/Components';
 import { WithAuth } from './lib/Categories/Auth/Components';
 
 import First from './src/Screens/First';
@@ -53,4 +54,4 @@ const App = DrawerNavigator({
 
 const AppContainer = props => <App screenProps={{ ...props }} />;
 
-export default WithAuth(AppContainer);
+export default WithAnalytics(WithAuth(AppContainer));

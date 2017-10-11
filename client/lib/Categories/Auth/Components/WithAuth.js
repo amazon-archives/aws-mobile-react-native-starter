@@ -36,9 +36,7 @@ function WithAuth(WrappedComponent) {
 
     async componentDidMount() {
       await LocalStorage.init();
-      await Auth.init();
-
-      const session = await new Promise(resolve => Auth.getSignInUserSession((e, s) => resolve(e ? null : s)));
+      const session = await Auth.init();
 
       this.setState({
         session,
