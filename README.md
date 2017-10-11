@@ -22,7 +22,6 @@ AWS Services used:
 * Amazon DynamoDB
 * Amazon S3
 * Amazon Pinpoint
-* Amazon Mobile Analytics
 * AWS Mobile Hub
 
 ## Prerequisites
