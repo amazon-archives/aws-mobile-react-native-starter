@@ -19,11 +19,19 @@ import {
 } from 'react-native';
 import { colors } from 'theme';
 import Storage from '../../lib/Categories/Storage';
+import { Analytics } from '../../lib/Categories/Analytics';
 
 class ViewPet extends React.PureComponent {
   static navigationOptions = ({ navigation, screenProps }) => console.log(screenProps) || ({
     title: `Viewing ${navigation.state.params.pet.name}`,
   })
+
+  componentDidMount() {
+    const { pet } = this.props.navigation.state.params;
+
+    Analytics.recordEvent('view_pet', { petId: pet.petId });
+  }
+
   render() {
     const { pet } = this.props.navigation.state.params;
 

@@ -32,17 +32,31 @@ let cognitoUser = null;
 /**********************
  * INIT *
  **********************/
+let initialized;
 const init = async function syncCognitoStorage() {
-  const userPool = new CognitoUserPool({
-    UserPoolId: awsmobile.aws_user_pools_id, // Your user pool id here
-    ClientId: awsmobile.aws_user_pools_web_client_id, // Your client id here
-  });
 
-  await new Promise((resolve, reject) => userPool.storage.sync((e, r) => (e ? reject(e) : resolve(r))));
+  if (!initialized) {
+    initialized = new Promise(async (resolve, reject) => {
+      const userPool = new CognitoUserPool({
+        UserPoolId: awsmobile.aws_user_pools_id, // Your user pool id here
+        ClientId: awsmobile.aws_user_pools_web_client_id, // Your client id here
+      });
 
-  const session = await new Promise(resolve => getSignInUserSession((e, s) => resolve(e ? null : s)));
+      try {
+        await new Promise((resolve, reject) => userPool.storage.sync((e, r) => (e ? reject(e) : resolve(r))));
 
-  console.log('Auth init', !!session);
+        const session = await new Promise(resolve => getSignInUserSession((e, s) => resolve(e ? null : s)));
+
+        console.log('Auth init', !!session);//, session, AWS.config.credentials);
+        resolve(session);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  return initialized;
+
 };
 
 /**********************
@@ -81,7 +95,7 @@ const getCognitoCredentials = function getCognitoCredentials(session) {
 
   const cognitoParams = {
     IdentityPoolId: awsmobile.aws_cognito_identity_pool_id,
-    Logins: {
+    Logins: session && {
       [loginCred]: session.getIdToken().getJwtToken(),
     },
   };
@@ -89,28 +103,19 @@ const getCognitoCredentials = function getCognitoCredentials(session) {
   return new AWS.CognitoIdentityCredentials(cognitoParams);
 };
 
-const setCredentials = function setCredentials(credentials) {
-  return new Promise((resolve, reject) => {
-    AWS.config.credentials = credentials;
+const setCredentials = async function setCredentials(credentials) {
+  AWS.config.credentials = credentials;
 
-    AWS.config.credentials.get((error) => {
-      if (error) {
-        console.error(error);
-        reject(error);
-        return;
-      }
+  await AWS.config.credentials.getPromise();
 
-      const { accessKeyId, secretAccessKey, sessionToken } = AWS.config.credentials;
-      const awsCredentials = {
-        accessKeyId,
-        secretAccessKey,
-        sessionToken,
-      };
-      LocalStorage.setItem('awsCredentials', JSON.stringify(awsCredentials));
+  const { accessKeyId, secretAccessKey, sessionToken } = AWS.config.credentials;
+  const awsCredentials = {
+    accessKeyId,
+    secretAccessKey,
+    sessionToken,
+  };
 
-      resolve(awsCredentials);
-    });
-  });
+  LocalStorage.setItem('awsCredentials', JSON.stringify(awsCredentials));
 };
 
 const getCredentials = async function getCredentials(session, callbacks, ctx) {
@@ -304,8 +309,7 @@ function getSignInUserSession(callback) {
 
   if (user) {
     user.getSession((err, res) => {
-      getCredentials(res, { onSuccess: () => null });
-      callback(err, res);
+      getCredentials(res, { onSuccess: () => callback(null, res) });
     });
 
     return;
@@ -314,9 +318,10 @@ function getSignInUserSession(callback) {
   console.log('Setting unauth credentials');
   setCredentials(new AWS.CognitoIdentityCredentials({
     IdentityPoolId: awsmobile.aws_cognito_identity_pool_id,
-  }));
-  LocalStorage.setItem('isLoggedIn', false);
-  callback();
+  })).then(function (creds) {
+    LocalStorage.setItem('isLoggedIn', false);
+    callback();
+  });
 }
 
 function isSignedIn() {

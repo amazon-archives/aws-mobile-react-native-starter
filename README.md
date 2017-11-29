@@ -21,6 +21,7 @@ AWS Services used:
 * AWS Lambda
 * Amazon DynamoDB
 * Amazon S3
+* Amazon Pinpoint
 * AWS Mobile Hub
 
 ## Prerequisites
@@ -98,7 +99,7 @@ First clone this repo: `git clone https://github.com/awslabs/aws-mobile-react-na
 
 ## Use features in your app.
 
-This starter app includes a set of libraries (under `client/lib`) to help you integrate features into your own React Native app. These libraries include helpers, React [Higher Order Components](https://facebook.github.io/react/docs/higher-order-components.html) that you can use to easily add capabilities for Sign-Up, Sign-In or API Access with basic reusable React Components through `Auth`, `API` and `Storage` HOCs.
+This starter app includes a set of libraries (under `client/lib`) to help you integrate features into your own React Native app. These libraries include helpers, React [Higher Order Components](https://facebook.github.io/react/docs/higher-order-components.html) that you can use to easily add capabilities for Sign-Up, Sign-In or API Access with basic reusable React Components through `Auth`, `API`, `Analytics` and `Storage` HOCs.
 
 You will need [Create React Native App](https://github.com/react-community/create-react-native-app) for the next sections.
 
@@ -134,7 +135,7 @@ import { WithAuth } from './lib/Categories/Auth/Components';
 
 This HOC will add a prop called `session` to your component as well as a method called `doSignOut()`. There is also a wrapper class called `Auth` as part of this which is a helper for common Sign-Up and Sign-In activities. We'll show you how to use the `session` and `doSignOut()` capabilities next.
 
-6. Edit your App component to transform it into one that suports `Auth`  
+6. Edit your App component to transform it into one that supports `Auth`  
 ```javascript
 export default WithAuth(class App extends React.Component {
   // ...
@@ -190,12 +191,12 @@ The following steps require the `WithAuth` section to be completed first. Please
 import awsmobile from './aws-exports';
 ```
 
-3. Import the `WithAuth` HOC from the library
+3. Import the `WithAPI` HOC from the library
 ```javascript
 import { WithAPI } from './lib/Categories/API/Components';
 ```
 
-4. Edit your App component to transform it into one that suports `API`  
+4. Edit your App component to transform it into one that supports `API`  
 ```javascript
 export default WithAPI(WithAuth(class App extends React.Component {
   // ...
@@ -309,7 +310,7 @@ import { WithStorage } from './lib/Categories/Storage/Components';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 ```
 
-8. Edit your App component to transform it into one that suports `Storage`  
+8. Edit your App component to transform it into one that supports `Storage`  
 ```javascript
 export default WithStorage(WithAuth(class App extends React.Component {
   // ...
@@ -398,6 +399,71 @@ export default WithStorage(WithAuth(class App extends React.Component {
 
 9. You can now store objects in the Cloud on S3 from React Native using AWS IAM credentials. After you press the **Upload file** button go back into your Mobile Hub project and click the **Resources** button on the left of the console. Under the section that says **Amazon S3 Buckets** there should be one that has **userfiles** in the name. Click that and you'll see it has a folder labeled **private** which is organized by the user Identities. This will contain the images you've uploaded.
 
+### Analytics<a name="analytics"></a>
+Applications today often track key trends such as new vs. returning users, user retention, and custom in-app behavior events. This starter application provides an `Analytics` component that helps with this task. Tracked events and sessions will be visible in [Amazon Pinpoint](https://aws.amazon.com/pinpoint/).
+
+The starter application retrieves AWS credentials using the `WithAuth` HOC from the previous section via Amazon Cognito. This section outlines using an `Analytics` feature which automatically uses these credentials to send analytics information for both authenticated and unautenticated users.
+
+The following steps require the `WithAuth` section to be completed first. Please follow steps 1-9 from the earlier [Sign-Up and Sign-In](#advanced-auth) section.
+
+1. Install additional dependencies  
+`npm install aws-sdk-mobile-analytics --save`
+
+2. Import the `aws-exports.js` file
+```javascript
+import awsmobile from './aws-exports';
+```
+
+3. Import the `Analytics` component and the `WithAnalytics` HOC from the library
+```javascript
+import { WithAnalytics } from './lib/Categories/Analytics/Components';
+import { Analytics } from './lib/Categories/Analytics';
+```
+
+4. Edit your App component to transform it into one that supports `Analytics`
+```javascript
+export default WithAnalytics(WithAuth(class App extends React.Component {
+  // ...
+}));
+```
+
+6. Add a handler method to your component to record an event
+```javascript
+export default WithAnalytics(WithAuth(class App extends React.Component {
+  // ...
+
+  async handleRecordEvent() {
+    Analytics.recordEvent('my_custom_event', { myAttribute: 'myValue' });
+  }
+
+  // ...
+}));
+```
+
+7. Change your `render()` method to show a button to invoke your API
+```jsx
+render() {
+  const { session } = this.props;
+
+  return (
+    session ?
+      (<View style={styles.container}>
+        <Button title="Record Event" onPress={this.handleRecordEvent.bind(this)} />
+        <Button title="Sign Out" onPress={() => this.props.doSignOut()} />
+      </View>)
+      :
+      (<View style={styles.container}>
+        <SignIn {...this.props} />
+        <SignUp {...this.props} />
+      </View>)
+  );
+}
+```
+
+8. Test it!  
+`npm run ios # or android`
+
+9. You can now record custom events from your application. After you login to the application press the **Record Event** button to record an event. Opening/closing the applications log session start and session end events.
 
 
 ## Modifying Express routes in Lambda <a name="lambdamodify"></a>

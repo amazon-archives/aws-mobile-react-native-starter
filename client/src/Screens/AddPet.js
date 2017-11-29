@@ -36,8 +36,10 @@ import {
 import RNFetchBlob from 'react-native-fetch-blob';
 import uuid from 'react-native-uuid';
 import mime from 'mime-types';
+import AWS from 'aws-sdk';
 
 import { colors } from 'theme';
+import { Analytics } from '../../lib/Categories/Analytics';
 import Auth from '../../lib/Categories/Auth';
 import API from '../../lib/Categories/API';
 import Storage from '../../lib/Categories/Storage';
@@ -148,6 +150,9 @@ class AddPet extends React.Component {
       .then(this.apiSavePet)
       .then(data => {
         this.setState({ showActivityIndicator: false });
+
+        Analytics.recordEvent('add_pet');
+
         this.props.screenProps.handleRetrievePet();
         this.props.screenProps.toggleModal();
       })

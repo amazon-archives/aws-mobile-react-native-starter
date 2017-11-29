@@ -72,6 +72,13 @@ class MemoryStorage {
   }
 
   /**
+   * Get all keys in local storage
+   */
+  getAllKeys() {
+    return Object.keys(this.obj);
+  }
+
+  /**
    * Removes an item from local storage
    *
    * @param {string} key 
