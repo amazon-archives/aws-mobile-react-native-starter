@@ -25,7 +25,6 @@ import {
 import { Button, Icon } from 'react-native-elements';
 import { DrawerNavigator, NavigationActions, StackNavigator } from 'react-navigation';
 
-import Auth from '../../lib/Categories/Auth';
 import {API, Storage} from 'aws-amplify-react-native';
 import AddPet from './AddPet';
 import ViewPet from './ViewPet';
