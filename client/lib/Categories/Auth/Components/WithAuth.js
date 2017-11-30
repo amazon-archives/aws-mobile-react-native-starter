@@ -13,7 +13,7 @@
 import React from 'react';
 
 import LocalStorage from '../../LocalStorage';
-import Auth from '../index';
+import { Auth } from 'aws-amplify-react-native';
 
 /**
  * @param {React.Component} WrappedComponent 
@@ -36,10 +36,13 @@ function WithAuth(WrappedComponent) {
 
     async componentDidMount() {
       await LocalStorage.init();
-      await Auth.init();
-
-      const session = await new Promise(resolve => Auth.getSignInUserSession((e, s) => resolve(e ? null : s)));
-
+      let session;
+      try {
+        session = await Auth.currentAuthenticatedUser();
+      } catch (err) {
+        console.log(err);
+        session = null;
+      }
       this.setState({
         session,
         ready: true,
@@ -53,7 +56,7 @@ function WithAuth(WrappedComponent) {
     handleOnSignUp() { }
 
     handleOnSignOut() {
-      Auth.handleSignOut();
+      Auth.signOut();
       this.setState({ session: null });
     }
 

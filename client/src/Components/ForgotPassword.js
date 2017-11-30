@@ -83,40 +83,33 @@ class ForgotPassword extends React.Component {
     this.handleMFASuccess = this.handleMFASuccess.bind(this);
   }
 
+  getcurrentuser() {
+   
+    this.props.auth.currentUser()
+      .then((data) => {return data})
+      .catch((err) => {return null});    
+  }
+
   handleResetClick() {
     const { auth } = this.props;
     const { username } = this.state;
-    const user = this.props.auth.getCurrentUser();
-
-    auth.handleForgotPassword(user ? user.username : username, {
-      onFailure: ((err) => {
-        this.setState({ errorMessage: err.message });
-      }).bind(this),
-      inputVerificationCode: ((data) => {
-        this.setState({ showMFAPrompt: true });
-      }).bind(this),
-      onSuccess: (() => {
-        this.props.onSuccess();
-      }).bind(this),
-    });
+    const user = this.getcurrentuser();
+    const send = user ? user.username : username;
+    auth.forgotPassword(send)
+      .then(this.setState({ showMFAPrompt: true }))
+      .catch((err) => {console.log(err)});
   }
 
   async handleMFAValidate(code = '') {
     const { auth } = this.props;
     const { username, password } = this.state;
-    const user = this.props.auth.getCurrentUser();
-
+    const user = this.getcurrentuser();
+    const send = user ? user.username : username;
     try {
-      await new Promise((resolve, reject) => {
-        auth.handleForgotPasswordReset(user ? user.username : username, code, password, {
-          onFailure: reject,
-          onSuccess: resolve,
-        });
-      });
-    } catch (exception) {
-      return exception.message;
+      await auth.forgotPasswordSubmit(send, code, password);
+    } catch (err) {
+      return err;
     }
-
     return true;
   }
 
@@ -133,7 +126,7 @@ class ForgotPassword extends React.Component {
   }
 
   render() {
-    const user = this.props.auth.getCurrentUser();
+    const user = this.getcurrentuser();
 
     return (
       <ScrollView contentContainerStyle={styles.container}>

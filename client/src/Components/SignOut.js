@@ -16,7 +16,7 @@ import { Text } from 'react-native';
 export default class SignOut extends React.Component {
   componentDidMount() {
     const { auth } = this.props.screenProps;
-    auth.handleSignOut();
+    auth.signOut();
 
     this.props.rootNavigator.navigate('FirstScreen');
   }

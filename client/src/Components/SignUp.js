@@ -28,7 +28,7 @@ import {
 import { StackNavigator } from 'react-navigation';
 
 import MFAPrompt from './MFAPrompt'
-import Auth from '../../lib/Categories/Auth';
+import { Auth } from 'aws-amplify-react-native';
 import Constants from '../Utils/constants';
 import { colors } from 'theme';
 
@@ -72,47 +72,29 @@ class SignUp extends React.Component {
   async handleSignUp() {
     const { username, password, email, phoneNumber } = this.state;
     let userConfirmed = true;
+    
+    Auth.signUp(username, password, email, phoneNumber)
+      .then( data => {
+        userConfirmed = data.userConfirmed;
 
-    try {
-      await new Promise((resolve, reject) => {
-        Auth.handleNewCustomerRegistration(username, password, { Name: 'email', Value: email }, { Name: 'phone_number', Value: phoneNumber }, (err, result) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-
-          userConfirmed = !!result.userConfirmed;
-          resolve();
-        });
+        this.setState({ showMFAPrompt: !userConfirmed });
+              
+        if (userConfirmed) {
+          this.onSignUp();
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({ errorMessage: err });
+        return;
       });
-
-      this.setState({ errorMessage: '' });
-    } catch (exception) {
-      this.setState({ errorMessage: exception.message });
-      return;
-    }
-
-    this.setState({ showMFAPrompt: !userConfirmed });
-
-    if (userConfirmed) {
-      this.onSignUp();
-    }
-
   }
 
   async handleMFAValidate(code = '') {
     try {
-      await new Promise((resolve, reject) => {
-        Auth.handleSubmitVerificationCode(this.state.username, code, (err, result) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-
-          resolve(result);
-        });
-      });
-
+      Auth.confirmSignUp(this.state.username, code)
+        .then(data => console.log('sign up successful ->',data))
+        .catch(err => console.log(err))
     } catch (exception) {
       return exception.message || exception;
     }

@@ -38,9 +38,7 @@ import uuid from 'react-native-uuid';
 import mime from 'mime-types';
 
 import { colors } from 'theme';
-import Auth from '../../lib/Categories/Auth';
-import API from '../../lib/Categories/API';
-import Storage from '../../lib/Categories/Storage';
+import {API, Storage} from 'aws-amplify-react-native';
 import files from '../Utils/files';
 import awsmobile from '../../aws-exports';
 import DatePicker from '../Components/DatePicker';
@@ -126,15 +124,15 @@ class AddPet extends React.Component {
     const imagePath = image.uri;
     const picName = `${uuid.v1()}.${extension}`;
     const userId = AWS.config.credentials.data.IdentityId;
-    const key = `private/${userId}/${picName}`;
+    const key = `${picName}`;
 
     return files.readFile(imagePath)
-      .then(buffer => Storage.putObject(key, buffer, result.type))
+      .then(buffer => Storage.put(key, buffer,{level:'private',contentType: result.type}))
       .then(fileInfo => ({ key: fileInfo.key }))
       .then(x => console.log('SAVED', x) || x);
   }
 
-  AddPet = () => {
+  AddPet = async () => {
     const petInfo = this.state.input;
     const { node: imageNode } = this.state.selectedImage;
 
@@ -157,7 +155,7 @@ class AddPet extends React.Component {
       });
   }
 
-  apiSavePet(pet) {
+  async apiSavePet(pet) {
     const cloudLogicArray = JSON.parse(awsmobile.aws_cloud_logic_custom);
     const endPoint = cloudLogicArray[0].endpoint;
     const requestParams = {
@@ -167,7 +165,7 @@ class AddPet extends React.Component {
       body: JSON.stringify(pet),
     }
 
-    return API.restRequest(requestParams);
+    return await API.post('Pets','/items/pets',{headers:{'content-type': 'application/json; charset=utf-8'}});
   }
 
   updateGender = (index) => {

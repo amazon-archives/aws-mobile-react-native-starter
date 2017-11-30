@@ -3,8 +3,8 @@ package com.awsmobilereactnativesample;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.amazonaws.RNAWSCognitoPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
-import com.airlabsinc.RNAWSCognitoPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;

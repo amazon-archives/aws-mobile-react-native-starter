@@ -51,7 +51,6 @@
 		6F32D5BF768346DFA1A4DE2D /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 76DE8A544E5B40A6AF33E632 /* Montserrat-Light.ttf */; };
 		76F940871F3F62AE0088C328 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76F940861F3F629E0088C328 /* libRCTCameraRoll.a */; };
 		76F940881F3F62B40088C328 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76F940801F3F627C0088C328 /* libRNVectorIcons.a */; };
-		76F9409E1F3F65B10088C328 /* libRNAWSCognito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76F9409D1F3F65A60088C328 /* libRNAWSCognito.a */; };
 		76F940AE1F3F66F40088C328 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 76F940AD1F3F66F40088C328 /* Fonts */; };
 		7C1D52DED139452982B1B064 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B6DF850931E34915920DA089 /* Montserrat-Regular.ttf */; };
 		7F14B27FBB544E56991D4271 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22E1BCC0C05942C6A2255CBD /* Lato-Regular.ttf */; };
@@ -74,6 +73,7 @@
 		E3D764273A604FF49A806D99 /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D10E31BE54D42A0A28897F7 /* Montserrat-Italic.ttf */; };
 		EB263C175F024F68B8B9881E /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58DC8864838B4D9CAEC73896 /* Ionicons.ttf */; };
 		F63C93E3B4B44F6FB0D6526A /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5BD3CF33D5149CCBC0D4C15 /* Zocial.ttf */; };
+		5BE4ACBAA9A94B09BCE0F020 /* libRNAWSCognito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EBE467C02684E4B930A5E0B /* libRNAWSCognito.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -294,13 +294,6 @@
 			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
 			remoteInfo = RCTCameraRoll;
 		};
-		76F9409C1F3F65A60088C328 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 76F940981F3F65A60088C328 /* RNAWSCognito.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNAWSCognito;
-		};
 		76FFE55D1F420F970024FA91 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A02E9F618404F36A747E522 /* RNFetchBlob.xcodeproj */;
@@ -367,7 +360,6 @@
 		758E14AB164B4BD9ABE7701A /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = ../assets/fonts/FontAwesome.ttf; sourceTree = "<group>"; };
 		76DE8A544E5B40A6AF33E632 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Light.ttf"; path = "../assets/fonts/Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		76F940811F3F629E0088C328 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
-		76F940981F3F65A60088C328 /* RNAWSCognito.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNAWSCognito.xcodeproj; path = "../node_modules/react-native-aws-cognito-js/ios/RNAWSCognito.xcodeproj"; sourceTree = "<group>"; };
 		76F940AD1F3F66F40088C328 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -389,6 +381,8 @@
 		E761104967E245D9B24ABB87 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = ../assets/fonts/EvilIcons.ttf; sourceTree = "<group>"; };
 		ED5469E16FE54E4FA5BC6138 /* Butler-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Butler-ExtraBold.ttf"; path = "../assets/fonts/Butler-ExtraBold.ttf"; sourceTree = "<group>"; };
 		F8BE33427F69444291DFE84D /* Lato-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Bold.ttf"; path = "../assets/fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
+		606D48E7EF684407A9F07765 /* RNAWSCognito.xcodeproj */ = {isa = PBXFileReference; name = "RNAWSCognito.xcodeproj"; path = "../node_modules/amazon-cognito-identity-js/ios/RNAWSCognito.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		7EBE467C02684E4B930A5E0B /* libRNAWSCognito.a */ = {isa = PBXFileReference; name = "libRNAWSCognito.a"; path = "libRNAWSCognito.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -404,7 +398,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76F9409E1F3F65B10088C328 /* libRNAWSCognito.a in Frameworks */,
 				76F940881F3F62B40088C328 /* libRNVectorIcons.a in Frameworks */,
 				76F940871F3F62AE0088C328 /* libRCTCameraRoll.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -419,6 +412,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				A6B36CFCFE1B45E890F3E066 /* libRNFetchBlob.a in Frameworks */,
+				5BE4ACBAA9A94B09BCE0F020 /* libRNAWSCognito.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,14 +619,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		76F940991F3F65A60088C328 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				76F9409D1F3F65A60088C328 /* libRNAWSCognito.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		76FFE53B1F420F970024FA91 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -653,7 +639,6 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				76F940981F3F65A60088C328 /* RNAWSCognito.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -667,6 +652,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				CFC232AEFE084CC38063B361 /* RNVectorIcons.xcodeproj */,
 				1A02E9F618404F36A747E522 /* RNFetchBlob.xcodeproj */,
+				606D48E7EF684407A9F07765 /* RNAWSCognito.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -862,10 +848,6 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-				},
-				{
-					ProductGroup = 76F940991F3F65A60088C328 /* Products */;
-					ProjectRef = 76F940981F3F65A60088C328 /* RNAWSCognito.xcodeproj */;
 				},
 				{
 					ProductGroup = 76FFE53B1F420F970024FA91 /* Products */;
@@ -1090,13 +1072,6 @@
 			remoteRef = 76F940851F3F629E0088C328 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		76F9409D1F3F65A60088C328 /* libRNAWSCognito.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNAWSCognito.a;
-			remoteRef = 76F9409C1F3F65A60088C328 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		76FFE55E1F420F970024FA91 /* libRNFetchBlob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1295,13 +1270,13 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/amazon-cognito-identity-js/ios/**",
 				);
 				INFOPLIST_FILE = awsmobilereactnativesampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1322,13 +1297,13 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/amazon-cognito-identity-js/ios/**",
 				);
 				INFOPLIST_FILE = awsmobilereactnativesampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1350,6 +1325,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/amazon-cognito-identity-js/ios/**",
 				);
 				INFOPLIST_FILE = awsmobilereactnativesample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1372,6 +1348,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/amazon-cognito-identity-js/ios/**",
 				);
 				INFOPLIST_FILE = awsmobilereactnativesample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1401,12 +1378,12 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/amazon-cognito-identity-js/ios/**",
 				);
 				INFOPLIST_FILE = "awsmobilereactnativesample-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1437,12 +1414,12 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/amazon-cognito-identity-js/ios/**",
 				);
 				INFOPLIST_FILE = "awsmobilereactnativesample-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1473,7 +1450,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.awsmobilereactnativesample-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1498,7 +1474,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.awsmobilereactnativesample-tvOSTests";

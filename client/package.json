@@ -11,6 +11,7 @@
     "test": "node node_modules/jest/bin/jest.js --watch"
   },
   "dependencies": {
+    "aws-amplify-react-native": "^0.1.5",
     "aws-sdk": "^2.97.0",
     "aws4-react-native": "^0.0.2",
     "axios": "^0.16.2",

@@ -82,6 +82,7 @@ class LogIn extends React.Component {
       password: '',
       showMFAPrompt: false,
       errorMessage: '',
+      cognitoUser: '',
     };
 
     this.baseState = this.state;
@@ -94,6 +95,12 @@ class LogIn extends React.Component {
     this.onLogIn = this.onLogIn.bind(this);
   }
 
+  async onLogIn() {
+    this.setState(this.baseState);
+
+    this.props.onLogIn();
+  }
+
   async doLogin() {
     const { auth } = this.props;
     const { username, password } = this.state;
@@ -102,28 +109,15 @@ class LogIn extends React.Component {
     let session = null;
 
     try {
-      session = await new Promise((resolve, reject) => {
-        auth.handleSignIn(username, password, auth.loginCallbackFactory({
-          onSuccess(result) {
-            console.log('loginCallbacks.onSuccess', result);
-            session = result;
-            resolve(session);
-          },
-          onFailure(exception) {
-            console.log('loginCallbacks.onFailure', exception);
-            reject(exception);
-          },
-          newPasswordRequired(data) {
-            console.log('loginCallbacks.newPasswordRequired', data);
-            reject('newPasswordRequired');
-          },
-          mfaRequired(challengeName, challengeParameters) {
-            console.log('loginCallbacks.mfaRequired', challengeName, challengeParameters);
-            showMFAPrompt = true;
-            resolve();
-          },
-        }, this));
-      });
+      session = await auth.signIn(username, password)
+        .then((data) => {
+          console.log('we get cognitouse:', data),
+          this.setState({cognitoUser: data}),
+          showMFAPrompt = true;
+          console.log('login mfaRequired');
+        })
+        .catch(err => console.log(err));
+
     } catch (exception) {
       console.log(exception);
       errorMessage = exception.invalidCredentialsMessage || exception.message || exception;
@@ -147,28 +141,19 @@ class LogIn extends React.Component {
     setTimeout(this.doLogin, 0);
   }
 
-  async onLogIn() {
-    this.setState(this.baseState);
-
-    this.props.onLogIn();
-  }
-
   async handleMFAValidate(code = '') {
     const { auth } = this.props;
 
     try {
-      const session = await new Promise((resolve, reject) => {
-        auth.sendMFAVerificationCode(code, {
-          onFailure(err) {
-            reject(err);
-          },
-          onSuccess(result) {
-            resolve(result);
-          },
-        }, this);
-      });
-
-      this.setState({ session });
+      let session = null;
+      auth.confirmSignIn(this.state.cognitoUser, code)
+        .then(
+          session = await auth.currentSession(),
+          this.setState({ session }),
+        )
+        .catch((err) => {
+          return err;
+        });
     } catch (exception) {
       return exception.message;
     }

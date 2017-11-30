@@ -26,8 +26,7 @@ import { Button, Icon } from 'react-native-elements';
 import { DrawerNavigator, NavigationActions, StackNavigator } from 'react-navigation';
 
 import Auth from '../../lib/Categories/Auth';
-import Storage from '../../lib/Categories/Storage';
-import API from '../../lib/Categories/API';
+import {API, Storage} from 'aws-amplify-react-native';
 import AddPet from './AddPet';
 import ViewPet from './ViewPet';
 import UploadPhoto from '../Components/UploadPhoto';
@@ -79,8 +78,8 @@ class Home extends React.Component {
       method: 'GET',
       url: endPoint + '/items/pets',
     };
-
-    API.restRequest(requestParams).then(apiResponse => {
+    
+    API.get('Pets','/items/pets').then(apiResponse => {
       this.setState({ apiResponse, loading: false });
     }).catch(e => {
       this.setState({ apiResponse: e.message, loading: false });
@@ -101,7 +100,7 @@ class Home extends React.Component {
   }
 
   renderPet(pet, index) {
-    const uri = pet.picKey ? Storage.getObjectUrl(pet.picKey) : null;
+    const uri = pet.picKey ? Storage.get(pet.picKey) : null;
 
     return (
       <TouchableHighlight

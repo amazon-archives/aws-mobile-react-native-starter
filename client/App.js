@@ -16,12 +16,15 @@ import React from 'react';
 import { DrawerNavigator } from 'react-navigation';
 
 import { WithAuth } from './lib/Categories/Auth/Components';
-
+import Amplify from 'aws-amplify-react-native';
+import awsmobile from './aws-exports';
 import First from './src/Screens/First';
 import Splash from './src/Screens/Splash';
 import Home from './src/Screens/Home';
 import SignOut from './src/Components/SignOut';
 import ForgotPassword from './src/Components/ForgotPassword';
+
+Amplify.configure(awsmobile);
 
 const App = DrawerNavigator({
   Home: {
