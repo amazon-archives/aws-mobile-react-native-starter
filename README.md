@@ -4,6 +4,8 @@ Bootstrap a React Native application on AWS. This starter automatically provisio
 
 A companion blog post for this repository can be found in the AWS Mobile Blog: [Announcing: React Native Starter Project with One-Click AWS Deployment and Serverless Infrastructure](https://aws.amazon.com/blogs/mobile/announcing-react-native-starter-project-with-one-click-aws-deployment-and-serverless-infrastructure/). 
 
+This starter uses the [AWS Amplify JavaScript library](https://github.com/aws/aws-amplify) to add cloud support to the application.
+
 ### Quicklinks
  - [Getting started](#getstarted)
  - [Using Registration and Login components in your app](#advanced-auth)
