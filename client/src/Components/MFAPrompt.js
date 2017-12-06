@@ -10,7 +10,8 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Prompt from 'react-native-prompt';
 import { Keyboard, View, Text, StyleSheet } from 'react-native';
 import { FormInput } from 'react-native-elements';
