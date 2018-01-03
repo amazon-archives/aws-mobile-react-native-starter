@@ -28,7 +28,7 @@ import {
 } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 
-import MFAPrompt from './MFAPrompt';
+import MFAPrompt from '../../lib/Categories/Auth/Components/MFAPrompt';
 import ForgotPassword from './ForgotPassword';
 import { colors } from 'theme';
 import Constants from '../Utils/constants';
@@ -112,8 +112,8 @@ class LogIn extends React.Component {
       session = await auth.signIn(username, password)
         .then((data) => {
           console.log('we get cognitouse:', data),
-          this.setState({cognitoUser: data}),
-          showMFAPrompt = true;
+            this.setState({ cognitoUser: data }),
+            showMFAPrompt = true;
           console.log('login mfaRequired');
         })
         .catch(err => console.log(err));
@@ -148,9 +148,9 @@ class LogIn extends React.Component {
       let session = null;
       auth.confirmSignIn(this.state.cognitoUser, code)
         .then(
-          session = await auth.currentSession(),
-          this.setState({ session }),
-        )
+        session = await auth.currentSession(),
+        this.setState({ session }),
+      )
         .catch((err) => {
           return err;
         });

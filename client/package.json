@@ -16,6 +16,7 @@
     "buffer": "^5.0.7",
     "mime-type": "^3.0.5",
     "path": "^0.12.7",
+    "prop-types": "^15.6.0",
     "react": "16.0.0-alpha.12",
     "react-devtools": "^2.5.0",
     "react-native": "0.47.1",

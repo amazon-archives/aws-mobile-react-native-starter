@@ -19,7 +19,7 @@ import {
   Button,
 } from 'react-native-elements';
 
-import MFAPrompt from './MFAPrompt';
+import MFAPrompt from '../../lib/Categories/Auth/Components/MFAPrompt';
 import { colors } from 'theme';
 
 const { width } = Dimensions.get('window');
@@ -84,10 +84,10 @@ class ForgotPassword extends React.Component {
   }
 
   getcurrentuser() {
-   
+
     this.props.auth.currentUser()
-      .then((data) => {return data})
-      .catch((err) => {return null});    
+      .then((data) => { return data })
+      .catch((err) => { return null });
   }
 
   handleResetClick() {
@@ -97,7 +97,7 @@ class ForgotPassword extends React.Component {
     const send = user ? user.username : username;
     auth.forgotPassword(send)
       .then(this.setState({ showMFAPrompt: true }))
-      .catch((err) => {console.log(err)});
+      .catch((err) => { console.log(err) });
   }
 
   async handleMFAValidate(code = '') {

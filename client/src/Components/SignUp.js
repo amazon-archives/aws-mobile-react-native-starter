@@ -27,7 +27,7 @@ import {
 } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 
-import MFAPrompt from './MFAPrompt'
+import MFAPrompt from '../../lib/Categories/Auth/Components/MFAPrompt';
 import { Auth } from 'aws-amplify-react-native';
 import Constants from '../Utils/constants';
 import { colors } from 'theme';
@@ -72,13 +72,13 @@ class SignUp extends React.Component {
   async handleSignUp() {
     const { username, password, email, phoneNumber } = this.state;
     let userConfirmed = true;
-    
+
     Auth.signUp(username, password, email, phoneNumber)
-      .then( data => {
+      .then(data => {
         userConfirmed = data.userConfirmed;
 
         this.setState({ showMFAPrompt: !userConfirmed });
-              
+
         if (userConfirmed) {
           this.onSignUp();
         }
@@ -93,7 +93,7 @@ class SignUp extends React.Component {
   async handleMFAValidate(code = '') {
     try {
       Auth.confirmSignUp(this.state.username, code)
-        .then(data => console.log('sign up successful ->',data))
+        .then(data => console.log('sign up successful ->', data))
         .catch(err => console.log(err))
     } catch (exception) {
       return exception.message || exception;
