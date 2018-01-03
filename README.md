@@ -169,7 +169,7 @@ import Amplify, { API } from 'aws-amplify';
 Amplify.configure(awsmobile)
 ```
 
-4. Edit your App component to use Amplify's API functions to make REST calls to your API as follows:   
+5. Edit your App component to use Amplify's API functions to make REST calls to your API as follows:   
 ```javascript
 async function getData() { 
     let apiName = 'MyApiName';
@@ -181,10 +181,10 @@ async function getData() {
 }
 ```
 
-5. Test it!  
+6. Test it!  
 `npm run ios # or android`
 
-6. You can now invoke API Gateway APIs from your React Native that are protected via AWS IAM. You can use other REST calls as shown in this guide for [AWS Amplify API component](https://github.com/aws/aws-amplify/blob/master/media/api_guide.md)
+7. You can now invoke API Gateway APIs from your React Native that are protected via AWS IAM. You can use other REST calls as shown in this guide for [AWS Amplify API component](https://github.com/aws/aws-amplify/blob/master/media/api_guide.md)
 
 ### Storing content in the cloud <a name="storage"></a>
 Many applications today provide rich media such as images or videos. Sometimes these are also private to users. AWS Amplify Storage module gives a simple mechanism for managing user content in public or private storage.
@@ -206,7 +206,7 @@ import awsmobile from './aws-exports';
 Amplify.configure(awsmobile);
 ```
 
-3. Call Storage APIs in your code
+4. Call Storage APIs in your code
 ```javascript
 Storage.put('yourFile.txt', 'your key', {
         level: 'private', //access control level
@@ -218,7 +218,7 @@ Storage.put('yourFile.txt', 'your key', {
 Amplify Storage component provides users with APIs to perform PUT, GET, REMOVE and LIST bucket objects. The component is also configurable to store data in either private (Authenticated) folder or the public one. This can be specified using the `level` option with the call. 
 To learn more about the UI components and other API calls for Storage, please refer the [AWS Amplify Storage Guide](https://github.com/aws/aws-amplify/blob/master/media/storage_guide.md)
 
-4. Test it!  
+5. Test it!  
 `npm run ios # or android`
 
 
