@@ -44,7 +44,7 @@ First clone this repo: `git clone https://github.com/awslabs/aws-mobile-react-na
 1. Set up your AWS resources using AWS Mobile Hub by clicking the button below:
 
 <p align="center">
-  <a target="_blank" href="https://console.aws.amazon.com/mobilehub/home?region=us-east-1#/starterkit/?config=https%3A%2F%2Fgithub.com%2Fawslabs%2Faws-mobile-react-native-starter%2Fblob%2Fmaster%2Fbackend%2Fimport_mobilehub%2Freactnative-starter.zip&app=react-native">
+  <a target="_blank" href="https://console.aws.amazon.com/mobilehub/home?region=us-east-1#/starterkit/?config=https://github.com/awslabs/aws-mobile-react-native-starter/blob/master/backend/import_mobilehub/reactnative-starter.zip&app=react-native">
     <span>
         <img height="100%" src="https://s3.amazonaws.com/deploytomh/button-deploy-aws-mh.png"/>
     </span>
