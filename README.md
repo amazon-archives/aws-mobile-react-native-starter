@@ -57,12 +57,11 @@ First clone this repo: `git clone https://github.com/awslabs/aws-mobile-react-na
 
 ![Alt Text](media/console.gif)
 
-1. Before proceeding further, in the Mobile Hub console click the **Cloud Logic** tile and ensure that the API deployment status at the bottom shows **CREATE_COMPLETE** (_this can take a few moments_).
+If you have already downloaded the `aws-exports.js` and added it to your `./aws-mobile-react-native-starter/client`, you can skip steps 1 and 2. 
 
-2. Click **Configure** on the left hand bar of the console and select the **Hosting and Streaming tile**.
+1. Scroll to the **Backend** section on the console and select the **Hosting and Streaming tile**.
 
-
-3. At the bottom of the page click **Download aws-exports.js file**. Copy this file into the `./aws-mobile-react-native-starter/client` folder of the repo you cloned.
+2. At the bottom of the page click **Download aws-exports.js file**. Copy this file into the `./aws-mobile-react-native-starter/client` folder of the repo you cloned.
 
    * _Alternatively using the AWS CLI_:
 
@@ -72,7 +71,7 @@ First clone this repo: `git clone https://github.com/awslabs/aws-mobile-react-na
      $ aws s3api get-object --bucket <YOUR_BUCKET_NAME> --key aws-exports.js ./aws-exports.js
      ```
 
-5. Navigate into  `./aws-mobile-react-native-starter/client`  and run:
+3. Navigate into  `./aws-mobile-react-native-starter/client`  and run:
 
    ```
    $ npm install
@@ -100,7 +99,7 @@ First clone this repo: `git clone https://github.com/awslabs/aws-mobile-react-na
 
 ## Use features in your app.
 
-This starter app includes a set of libraries (under `client/lib`) to help you integrate features into your own React Native app. These libraries include helpers, React [Higher Order Components](https://facebook.github.io/react/docs/higher-order-components.html) that you can use to easily add capabilities for Sign-Up, Sign-In or API Access with basic reusable React Components through `Auth`, `API` and `Storage` HOCs.
+This starter app uses AWS Amplify library to integrate with AWS. The library components can be used in your app to easily add capabilities for Authentication, Storage and API access.  
 
 You will need [Create React Native App](https://github.com/react-community/create-react-native-app) for the next sections.
 
@@ -114,292 +113,112 @@ npm run eject # Eject as "React Native"
 ```
 - Download the `aws-exports.js` file from your AWS MobileHub project as outlined earlier in the [Getting started](#getstarted) section. Place it in the root of your new CRNA directory.
 
-- Copy `lib` folder from this starter app  
-`cp -rf ../<some-directory>/aws-react-native-native-starter/client/lib .`
 
-### Sign-up and Sign-In <a name="advanced-auth"></a>
+### Authentication <a name="advanced-auth"></a>
 
 1. Install dependencies with `npm install`
 
 2. Install additional dependencies:
 
-```npm install aws-sdk react-native-aws-cognito-js react-native-prompt --save```
+```npm install aws-amplify-react-native --save```
 
 3. Link the native components by running: `react-native link`
 
 4. Open the `App.js` file.
 
-5. Import the `WithAuth` HOC from the library
+5. Import the `Auth` module from the library and your aws-exports here
 ```javascript
-import { WithAuth } from './lib/Categories/Auth/Components';
+import { withAuthenticator } from 'aws-amplify-react-native';
+import {awsmobile} from './aws-exports';
 ```
-
-This HOC will add a prop called `session` to your component as well as a method called `doSignOut()`. There is also a wrapper class called `Auth` as part of this which is a helper for common Sign-Up and Sign-In activities. We'll show you how to use the `session` and `doSignOut()` capabilities next.
 
 6. Edit your App component to transform it into one that suports `Auth`  
 ```javascript
-export default WithAuth(class App extends React.Component {
+Amplify.configure(awsmobile);
+export default withAuthenticator(class App extends React.Component {
   // ...
 });
 ```
-
-7. Import the React Native Button component
-```javascript
-import { StyleSheet, Text, View, Button } from 'react-native';
-```
-
-8. Import the SignIn/SignUp example component
-```javascript
-import { SignIn, SignUp } from './lib/Categories/Auth/Components/Examples';
-```
-
-9. Change your `render()` method to check if a user is signed in or out, and show SignIn/SignUp components or a SignOut button accordingly.
-```jsx
-render() {
-  const { session } = this.props;
-
-  return (
-    session ?
-      (<View style={styles.container}>
-        <Button title="Sign Out" onPress={() => this.props.doSignOut()} />
-      </View>)
-      :
-      (<View style={styles.container}>
-        <SignIn {...this.props} />
-        <SignUp {...this.props} />
-      </View>)
-  );
-}
-```
-
-10. Test it!  
+7. Test it!
 `npm run ios # or android`
 
-11. You now have SignIn/SignUp/SignOut capabilities (With MFA support too!)
+The withAuthenticator component adds Sign Up, Sign In with MFA and Sign Out capabilites to your app out of box. You can either use this Higher Order Component, or build your own UI and use the APIs from [Amplify](https://github.com/aws/aws-amplify/blob/master/media/authentication_guide.md) too.
+
 
 ### Cloud APIs and Backend Access Control<a name="restclient"></a>
-In order to access resources in your AWS account that are protected via AWS [Identity and Access Management](http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) you will need to sign your requests using the [AWS Signature Version 4](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) signing process. The starter application supports signing requests both for uploading your images to Amazon S3, as well as communicating with the backend (AWS Lambda and DynamoDB) via Amazon API Gateway. There are many different ways that [IAM Permissions can be configured to Control Access to API Gateway](http://docs.aws.amazon.com/apigateway/latest/developerguide/permissions.html) using credentials which we encourage you to read more about.
+In order to access resources in your AWS account that are protected via AWS [Identity and Access Management](http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) you will need to sign your requests using the [AWS Signature Version 4](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) signing process. The starter app uses the API component from [Amplify](https://github.com/aws/aws-amplify) to make signed requests to your API's endpoint.
 
-The starter application retrieves AWS credentials using the `WithAuth` HOC from the previous section via Amazon Cognito. This section outlines using an `API` feature which automatically uses these credentials to sign requests to Amazon API Gateway which are secured using IAM.
-
-The following steps require the `WithAuth` section to be completed first. Please follow steps 1-9 from the earlier [Sign-Up and Sign-In](#advanced-auth) section.
+To make Authenticated calls to your API, you will need to use the library Auth component first to get the Authentcated AWS Credentials. You can make unauthenticated requests to your API too.   
 
 1. Install additional dependencies  
-`npm install aws4-react-native axios --save`
+`npm install aws-amplify-react-native --save`
 
 2. Import the `aws-exports.js` file
 ```javascript
 import awsmobile from './aws-exports';
 ```
 
-3. Import the `WithAuth` HOC from the library
+3. Import the API component from the library
 ```javascript
-import { WithAPI } from './lib/Categories/API/Components';
+import Amplify, { API } from 'aws-amplify';
 ```
 
-4. Edit your App component to transform it into one that suports `API`  
+4.Configure Amplify //you can skip this step if Amplify was already configured in the previous section on Auth
 ```javascript
-export default WithAPI(WithAuth(class App extends React.Component {
-  // ...
-}));
+Amplify.configure(awsmobile)
 ```
 
-5. Add `apiResponse` to the component's initial state  
+5. Edit your App component to use Amplify's API functions to make REST calls to your API as follows:   
 ```javascript
-export default WithAPI(WithAuth(class App extends React.Component {
-
-  state = {
-    apiResponse: null,
-  }
-
-  // ...
-}));
-```
-
-6. Add a handler method to your component to call your API
-```javascript
-export default WithAPI(WithAuth(class App extends React.Component {
-  // ...
-
-  async handleCallAPI() {
-    const { api } = this.props;
-
-    // Get endpoint
-    const cloudLogicArray = JSON.parse(awsmobile.aws_cloud_logic_custom);
-    const endPoint = cloudLogicArray[0].endpoint;
-
-    const requestParams = {
-      method: 'GET',
-      url: endPoint + '/items/pets',
-    };
-
-    let apiResponse = null;
-
-    try {
-      apiResponse = await api.restRequest(requestParams);
-    } catch (err) {
-      console.warn(err);
+async function getData() { 
+    let apiName = 'MyApiName';
+    let path = '/path';
+    let myInit = { // OPTIONAL
+        headers: {} // OPTIONAL
     }
-
-    this.setState({ apiResponse });
-  }
-
-  // ...
-}));
-```
-
-7. Change your `render()` method to show a button to invoke your API
-```jsx
-render() {
-  const { session } = this.props;
-
-  return (
-    session ?
-      (<View style={styles.container}>
-        <Button title="Call API" onPress={this.handleCallAPI.bind(this)} />
-        <Text>Response: {this.state.apiResponse && JSON.stringify(this.state.apiResponse)}</Text>
-        <Button title="Sign Out" onPress={() => this.props.doSignOut()} />
-      </View>)
-      :
-      (<View style={styles.container}>
-        <SignIn {...this.props} />
-        <SignUp {...this.props} />
-      </View>)
-  );
+    return await API.get(apiName, path, myInit);
 }
 ```
 
-8. Test it!  
+6. Test it!  
 `npm run ios # or android`
 
-9. You can now invoke API Gateway APIs from your React Native that are protected via AWS IAM. After you login to the application press the **Call API** button to see the JSON response returned from the network request.
+7. You can now invoke API Gateway APIs from your React Native that are protected via AWS IAM. You can use other REST calls as shown in this guide for [AWS Amplify API component](https://github.com/aws/aws-amplify/blob/master/media/api_guide.md)
 
 ### Storing content in the cloud <a name="storage"></a>
-Many applications today provide rich media such as images or videos. Sometimes these are also private to users. This starter project provides a `Storage` component that allows a user to upload data, such as an image, to an Amazon S3 bucket in a folder which is protected so that only that user can access the data. This is done by setting S3 bucket policies on unique user Identities provided by Amazon Cognito. You can read more about this [here](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_s3_cognito-bucket.html).
+Many applications today provide rich media such as images or videos. Sometimes these are also private to users. AWS Amplify Storage module gives a simple mechanism for managing user content in public or private storage.
 
-The `Storage` feature depends on the user to have valid credentials. The following steps require the `WithAuth` section to be completed first. Please follow steps 1-9 from the earlier [Sign-Up and Sign-In](#advanced-auth) section.
+The `Storage` component requires AWS Credentials to make calls to S3. If you need to store data in private folders for users, you will need to complete the Auth section first. Please follow steps from the earlier [Authentication](#advanced-auth) section.
 
-
-1. First, install additional dependencies  
-`npm install react-native-fetch-blob buffer --save`
-
-3. Next link the native bridge components
-   - `react-native-fetch-blob` is a library to help you with data transfer on React Native. Run the following command in your terminal:
-```sh
-RNFB_ANDROID_PERMISSIONS=true react-native link
+1. Import Storage component from the library
+```javascript
+import Amplify,{Storage} from 'aws-amplify-react-native'
 ```
 
-4. Import the `aws-exports.js` file if you haven't already
+2. Import the `aws-exports.js` file if you haven't already
 ```javascript
 import awsmobile from './aws-exports';
 ```
 
-5. Import dependencies (use `App.js` from the CRNA process):
+3. Configure Storage using your aws-exports if you haven't already
 ```javascript
-import AWS from 'aws-sdk';
-import RNFetchBlob from 'react-native-fetch-blob';
-import { Buffer } from 'buffer';
+Amplify.configure(awsmobile);
 ```
 
-6. Import the `WithStorage` HOC from the library
+4. Call Storage APIs in your code
 ```javascript
-import { WithStorage } from './lib/Categories/Storage/Components';
+Storage.put('yourFile.txt', 'your key', {
+        level: 'private', //access control level
+        contentType: 'text/plain' 
+    })
+    .then (result => console.log(result))
+    .catch(err => console.log(err));
 ```
+Amplify Storage component provides users with APIs to perform PUT, GET, REMOVE and LIST bucket objects. The component is also configurable to store data in either private (Authenticated) folder or the public one. This can be specified using the `level` option with the call. 
+To learn more about the UI components and other API calls for Storage, please refer the [AWS Amplify Storage Guide](https://github.com/aws/aws-amplify/blob/master/media/storage_guide.md)
 
-7. Import the React Native Image component
-```javascript
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
-```
-
-8. Edit your App component to transform it into one that suports `Storage`  
-```javascript
-export default WithStorage(WithAuth(class App extends React.Component {
-  // ...
-}));
-```
-
-9. Add `objectUrl` to the component's initial state  
-```javascript
-export default WithStorage(WithAuth(class App extends React.Component {
-
-  state = {
-    objectUrl: null,
-  }
-
-  // ...
-}));
-```
-
-10. Add a handler method to your component to upload a file to a private area for the signed in user. The sample method below shows how to download a sample PNG file of an AWS logo and upload it to the S3 bucket. Your application might get images from the camera roll on the phone (see the starter app code for examples of this).
-
-```javascript
-export default WithStorage(WithAuth(class App extends React.Component {
-  // ...
-
-  async handleUploadFile() {
-    const url = 'https://awsmedia.s3.amazonaws.com/AWS_Logo_PoweredBy_127px.png';
-    const [, fileName, extension] = /.*\/(.+)\.(\w+)$/.exec(url);
-
-    // Get cognito identity for the signed in user
-    const { IdentityId } = AWS.config.credentials.data;
-
-    // File will be uploaded to the user's private space in the S3 bucket
-    const key = `private/${IdentityId}/${fileName}`;
-
-    let objectUrl = null;
-
-    try {
-      // Download file from the internet.
-      const download = await RNFetchBlob.fetch('GET', url);
-      const { data } = download;
-      const { respInfo: { headers: { 'Content-Type': contentType } } } = download;
-
-      // Upload the file
-      const upload = await this.props.storage.putObject(key, new Buffer(data, 'base64'), contentType);
-
-      // Get url for stored object. This is an S3 presigned url. See: http://docs.aws.amazon.com/AmazonS3/latest/dev/ShareObjectPreSignedURL.html
-      objectUrl = this.props.storage.getObjectUrl(upload.key);
-
-      console.log(objectUrl);
-    } catch (err) {
-      console.warn(err);
-    }
-
-    this.setState({ objectUrl });
-  }
-
-  // ...
-}));
-```
-
-**Note**: The AWS Mobile Hub import process you ran at the begining created an S3 bucket with folders such as public and private. The code above creates a `key` variable for uploading to the private folder for this specific user Identitity. If you wish to make the data public you could use `const key = public/filename` as the upload location.
-
-11. Change your `render()` method to show a button to upload the file and the uploaded image
-```jsx
-  render() {
-    const { session } = this.props;
-
-    return (
-      session ?
-        (<View style={styles.container}>
-          {this.state.objectUrl && <Image source={{ uri: this.state.objectUrl }} style={{width: 200, height: 200, resizeMode: 'contain'}} />}
-          <Button title="Upload file" onPress={this.handleUploadFile.bind(this)} />
-          <Button title="Sign Out" onPress={() => this.props.doSignOut()} />
-        </View>)
-        :
-        (<View style={styles.container}>
-          <SignIn {...this.props} />
-          <SignUp {...this.props} />
-        </View>)
-    );
-  }
-```
-
-8. Test it!  
+5. Test it!  
 `npm run ios # or android`
-
-9. You can now store objects in the Cloud on S3 from React Native using AWS IAM credentials. After you press the **Upload file** button go back into your Mobile Hub project and click the **Resources** button on the left of the console. Under the section that says **Amazon S3 Buckets** there should be one that has **userfiles** in the name. Click that and you'll see it has a folder labeled **private** which is organized by the user Identities. This will contain the images you've uploaded.
-
 
 
 ## Modifying Express routes in Lambda <a name="lambdamodify"></a>
