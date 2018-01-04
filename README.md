@@ -57,12 +57,11 @@ First clone this repo: `git clone https://github.com/awslabs/aws-mobile-react-na
 
 ![Alt Text](media/console.gif)
 
-1. Before proceeding further, in the Mobile Hub console click the **Cloud Logic** tile and ensure that the API deployment status at the bottom shows **CREATE_COMPLETE** (_this can take a few moments_).
+If you have already downloaded the `aws-exports.js` and added it to your `./aws-mobile-react-native-starter/client`, you can skip steps 1 and 2. 
 
-2. Click **Configure** on the left hand bar of the console and select the **Hosting and Streaming tile**.
+1. Scroll to the **Backend** section on the console and select the **Hosting and Streaming tile**.
 
-
-3. At the bottom of the page click **Download aws-exports.js file**. Copy this file into the `./aws-mobile-react-native-starter/client` folder of the repo you cloned.
+2. At the bottom of the page click **Download aws-exports.js file**. Copy this file into the `./aws-mobile-react-native-starter/client` folder of the repo you cloned.
 
    * _Alternatively using the AWS CLI_:
 
@@ -72,7 +71,7 @@ First clone this repo: `git clone https://github.com/awslabs/aws-mobile-react-na
      $ aws s3api get-object --bucket <YOUR_BUCKET_NAME> --key aws-exports.js ./aws-exports.js
      ```
 
-5. Navigate into  `./aws-mobile-react-native-starter/client`  and run:
+3. Navigate into  `./aws-mobile-react-native-starter/client`  and run:
 
    ```
    $ npm install
