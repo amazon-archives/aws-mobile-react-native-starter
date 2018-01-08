@@ -18,7 +18,7 @@ import {
   Image,
 } from 'react-native';
 import { colors } from 'theme';
-import {Storage} from 'aws-amplify-react-native';
+import { Storage } from 'aws-amplify-react-native';
 
 class ViewPet extends React.PureComponent {
   static navigationOptions = ({ navigation, screenProps }) => console.log(screenProps) || ({
@@ -27,7 +27,7 @@ class ViewPet extends React.PureComponent {
   render() {
     const { pet } = this.props.navigation.state.params;
 
-    const uri = pet.picKey ? Storage.get(pet.picKey) : null;
+    const uri = pet.picUrl;
 
     const dob = new Date(pet.dob);
     const years = (new Date()).getFullYear() - dob.getFullYear();

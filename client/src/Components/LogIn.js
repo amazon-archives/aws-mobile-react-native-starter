@@ -115,9 +115,7 @@ class LogIn extends React.Component {
             this.setState({ cognitoUser: data }),
             showMFAPrompt = true;
           console.log('login mfaRequired');
-        })
-        .catch(err => console.log(err));
-
+        });
     } catch (exception) {
       console.log(exception);
       errorMessage = exception.invalidCredentialsMessage || exception.message || exception;
@@ -146,13 +144,10 @@ class LogIn extends React.Component {
 
     try {
       let session = null;
-      auth.confirmSignIn(this.state.cognitoUser, code)
-        .then(
-        session = await auth.currentSession(),
-        this.setState({ session }),
-      )
-        .catch((err) => {
-          return err;
+      await auth.confirmSignIn(this.state.cognitoUser, code)
+        .then(async () => {
+          session = await auth.currentSession();
+          this.setState({ session });
         });
     } catch (exception) {
       return exception.message;

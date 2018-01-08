@@ -71,8 +71,19 @@ class Home extends React.Component {
   }
 
   handleRetrievePet() {
-
     API.get('Pets', '/items/pets').then(apiResponse => {
+      return Promise.all(apiResponse.map(async (pet) => {
+        // Make "key" work with paths like:
+        // "private/us-east-1:7817b8c7-2a90-4735-90d4-9356d7f8f0c7/091357f0-f0bc-11e7-a6a2-937d1d45b80e.jpeg"
+        // and
+        // "44b223e0-9707-11e7-a7d2-cdc5b84df56b.jpeg"
+        const [, , , key] = /(([^\/]+\/){2})?(.+)$/.exec(pet.picKey);
+
+        const picUrl = pet.picKey && await Storage.get(key, { level: 'private' });
+
+        return { ...pet, picUrl };
+      }));
+    }).then(apiResponse => {
       this.setState({ apiResponse, loading: false });
     }).catch(e => {
       this.setState({ apiResponse: e.message, loading: false });
@@ -93,7 +104,7 @@ class Home extends React.Component {
   }
 
   renderPet(pet, index) {
-    const uri = pet.picKey ? Storage.get(pet.picKey) : null;
+    const uri = pet.picUrl;
 
     return (
       <TouchableHighlight
@@ -147,7 +158,9 @@ class Home extends React.Component {
             <View style={styles.container}>
               <Text style={styles.title}>My Pets</Text>
               {
-                apiResponse.map((pet, index) => this.renderPet(pet, index))
+                typeof apiResponse === 'string' ?
+                  <Text>{apiResponse}</Text> :
+                  apiResponse.map((pet, index) => this.renderPet(pet, index))
               }
             </View>
           }

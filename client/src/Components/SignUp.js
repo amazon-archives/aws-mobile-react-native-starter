@@ -85,16 +85,15 @@ class SignUp extends React.Component {
       })
       .catch(err => {
         console.log(err);
-        this.setState({ errorMessage: err });
+        this.setState({ errorMessage: err.message });
         return;
       });
   }
 
   async handleMFAValidate(code = '') {
     try {
-      Auth.confirmSignUp(this.state.username, code)
-        .then(data => console.log('sign up successful ->', data))
-        .catch(err => console.log(err))
+      await Auth.confirmSignUp(this.state.username, code)
+        .then(data => console.log('sign up successful ->', data));
     } catch (exception) {
       return exception.message || exception;
     }

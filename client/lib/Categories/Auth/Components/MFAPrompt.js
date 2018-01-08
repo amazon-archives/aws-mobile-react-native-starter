@@ -62,7 +62,6 @@ export default class MFAPrompt extends React.Component {
         }
       });
     } catch (err) {
-      debugger;
       this.setState({ promptTitle: `${err.message} Enter code again` });
     }
 
