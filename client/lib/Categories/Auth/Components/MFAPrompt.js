@@ -10,8 +10,10 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Prompt from 'react-native-prompt';
+import { Keyboard } from 'react-native';
 
 export default class MFAPrompt extends React.Component {
 
@@ -40,14 +42,25 @@ export default class MFAPrompt extends React.Component {
   }
 
   handleCancel() {
+    Keyboard.dismiss();
     this.props.onCancel();
   }
 
   async handleValidateMFACode(code) {
     try {
-      const result = await this.props.onValidate(code);
+      const validate = await this.props.onValidate(code);
+      const validCode = validate === true;
+      const promptTitle = validCode ?
+        'Enter code' :
+        `${validate} Enter code again`;
 
-      this.props.onSuccess(result);
+      this.setState({
+        promptTitle
+      }, () => {
+        if (validCode) {
+          this.props.onSuccess();
+        }
+      });
     } catch (err) {
       this.setState({ promptTitle: `${err.message} Enter code again` });
     }

@@ -11,11 +11,12 @@
     "test": "node node_modules/jest/bin/jest.js --watch"
   },
   "dependencies": {
-    "aws-amplify-react-native": "^0.1.5",
+    "aws-amplify-react-native": "^0.1.21",
     "aws-sdk": "^2.97.0",
     "buffer": "^5.0.7",
     "mime-type": "^3.0.5",
     "path": "^0.12.7",
+    "prop-types": "^15.6.0",
     "react": "16.0.0-alpha.12",
     "react-devtools": "^2.5.0",
     "react-native": "0.47.1",

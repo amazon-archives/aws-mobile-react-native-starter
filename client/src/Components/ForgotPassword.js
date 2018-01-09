@@ -19,7 +19,7 @@ import {
   Button,
 } from 'react-native-elements';
 
-import MFAPrompt from './MFAPrompt';
+import MFAPrompt from '../../lib/Categories/Auth/Components/MFAPrompt';
 import { colors } from 'theme';
 
 const { width } = Dimensions.get('window');
@@ -71,6 +71,7 @@ class ForgotPassword extends React.Component {
     super(props);
 
     this.state = {
+      signedInUser: null,
       username: '',
       password: '',
       errorMessage: '',
@@ -83,27 +84,29 @@ class ForgotPassword extends React.Component {
     this.handleMFASuccess = this.handleMFASuccess.bind(this);
   }
 
-  getcurrentuser() {
-   
-    this.props.auth.currentUser()
-      .then((data) => {return data})
-      .catch((err) => {return null});    
+  async componentDidMount() {
+    const signedInUser = await this.getCurrentUser();
+
+    this.setState({ signedInUser });
+  }
+
+  getCurrentUser() {
+    return this.props.auth.currentUser()
+      .catch((err) => { return null });
   }
 
   handleResetClick() {
     const { auth } = this.props;
-    const { username } = this.state;
-    const user = this.getcurrentuser();
+    const { username, signedInUser: user } = this.state;
     const send = user ? user.username : username;
     auth.forgotPassword(send)
       .then(this.setState({ showMFAPrompt: true }))
-      .catch((err) => {console.log(err)});
+      .catch((err) => { console.log(err) });
   }
 
   async handleMFAValidate(code = '') {
     const { auth } = this.props;
-    const { username, password } = this.state;
-    const user = this.getcurrentuser();
+    const { username, password, signedInUser: user } = this.state;
     const send = user ? user.username : username;
     try {
       await auth.forgotPasswordSubmit(send, code, password);
@@ -126,7 +129,7 @@ class ForgotPassword extends React.Component {
   }
 
   render() {
-    const user = this.getcurrentuser();
+    const { signedInUser: user } = this.state;
 
     return (
       <ScrollView contentContainerStyle={styles.container}>
