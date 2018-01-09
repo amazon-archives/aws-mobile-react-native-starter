@@ -268,9 +268,9 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-aws-amplify-react-native@^0.1.5:
-  version "0.1.11"
-  resolved "https://registry.yarnpkg.com/aws-amplify-react-native/-/aws-amplify-react-native-0.1.11.tgz#3e5df276a2b0a6402ca6180444fbf0b0482739af"
+aws-amplify-react-native@^0.1.21:
+  version "0.1.21"
+  resolved "https://registry.yarnpkg.com/aws-amplify-react-native/-/aws-amplify-react-native-0.1.21.tgz#c05877682f9a68eee4600c207a639cca83202325"
   dependencies:
     amazon-cognito-identity-js "^1.25.0"
     aws-sdk "^2.145.0"
