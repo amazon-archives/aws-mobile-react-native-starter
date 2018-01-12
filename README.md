@@ -57,16 +57,16 @@ First clone this repo: `git clone https://github.com/awslabs/aws-mobile-react-na
 
 ![Alt Text](media/console.gif)
 
-If you have already downloaded the `aws-exports.js` and added it to your `./aws-mobile-react-native-starter/client`, you can skip steps 1 and 2. 
+If you have already downloaded the `aws-exports.js` and added it to your `./aws-mobile-react-native-starter/client/src`, you can skip steps 1 and 2. 
 
 1. Scroll to the **Backend** section on the console and select the **Hosting and Streaming tile**.
 
-2. At the bottom of the page click **Download aws-exports.js file**. Copy this file into the `./aws-mobile-react-native-starter/client` folder of the repo you cloned.
+2. At the bottom of the page click **Download aws-exports.js file**. Copy this file into the `./aws-mobile-react-native-starter/client/src` folder of the repo you cloned.
 
    * _Alternatively using the AWS CLI_:
 
      ```
-     $ cd ../aws-mobile-react-native-starter/client
+     $ cd ../aws-mobile-react-native-starter/client/src
      $ aws s3api list-buckets --query 'Buckets[?starts_with(Name,`reactnativestarter-hosting`)].Name' |grep reactnativestarter |tr -d '"'
      $ aws s3api get-object --bucket <YOUR_BUCKET_NAME> --key aws-exports.js ./aws-exports.js
      ```

@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "aws-amplify-react-native": "^0.1.21",
-    "aws-sdk": "^2.97.0",
+    "aws-sdk": "2.177.0",
     "buffer": "^5.0.7",
     "mime-type": "^3.0.5",
     "path": "^0.12.7",
