@@ -30,7 +30,7 @@ import AddPet from './AddPet';
 import ViewPet from './ViewPet';
 import UploadPhoto from '../Components/UploadPhoto';
 import SideMenuIcon from '../Components/SideMenuIcon';
-import awsmobile from '../../aws-exports';
+import awsmobile from '../aws-exports';
 import { colors } from 'theme';
 
 let styles = {};
