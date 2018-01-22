@@ -1,4 +1,6 @@
 --- !com.amazonaws.mobilehub.v0.Project
+apps:
+  react-native: !com.amazonaws.mobilehub.v0.AppDO {}
 uploads:
   - !com.amazonaws.mobilehub.v0.Upload
     fileName: crud-lambda.zip
