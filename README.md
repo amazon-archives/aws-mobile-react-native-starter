@@ -31,6 +31,8 @@ AWS Services used:
 - [Node.js](https://nodejs.org/) with NPM 
   - `npm install -g react-native-cli`
   - `npm install -g create-react-native-app`
+- [AWS Mobile CLI](https://github.com/aws/awsmobile-cli)
+  - `npm install -g awsmobile-cli`
 - (_Optional_) [Watchman](https://facebook.github.io/watchman/)
   - On macOS, it is recommended to install it using [Homebrew](https://brew.sh/)
     - `brew install watchman`
@@ -52,29 +54,27 @@ First clone this repo: `git clone https://github.com/awslabs/aws-mobile-react-na
 </p>
 
 2. Press **Import project**
+3. Note your projects unique ID i.e. "05d550cb-ce2b-426a-a298-deb3c6630e4f". You can see this in the address bar:
+
+https://console.aws.amazon.com/mobilehub/home?region=us-east-1#/**YOUR-UNIQUE-PROJECT-ID-IS-HERE**/build
 
 ## Client Setup
 
-![Alt Text](media/console.gif)
-
 If you have already downloaded the `aws-exports.js` and added it to your `./aws-mobile-react-native-starter/client/src`, you can skip steps 1 and 2. 
 
-1. Scroll to the **Backend** section on the console and select the **Hosting and Streaming tile**.
+1. Navigate into `./aws-mobile-react-native-starter/client/src`.
 
-2. At the bottom of the page click **Download aws-exports.js file**. Copy this file into the `./aws-mobile-react-native-starter/client/src` folder of the repo you cloned.
+2. Install and configure your mobile client  and run:
 
-   * _Alternatively using the AWS CLI_:
+ ```
+ $ npm install
+ $ npm install -g awsmobile-cli
+ $ awsmobile init your-uniuqe-project-id
+ ```
 
-     ```
-     $ cd ../aws-mobile-react-native-starter/client/src
-     $ aws s3api list-buckets --query 'Buckets[?starts_with(Name,`reactnativestarter-hosting`)].Name' |grep reactnativestarter |tr -d '"'
-     $ aws s3api get-object --bucket <YOUR_BUCKET_NAME> --key aws-exports.js ./aws-exports.js
-     ```
-
-3. Navigate into  `./aws-mobile-react-native-starter/client`  and run:
+3. Finally run the app:
 
    ```
-   $ npm install
    $ npm run ios #npm run android
    ```
 
