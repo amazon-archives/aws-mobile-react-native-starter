@@ -69,7 +69,7 @@ If you have already downloaded the `aws-exports.js` and added it to your `./aws-
  ```
  $ npm install
  $ npm install -g awsmobile-cli
- $ awsmobile init your-uniuqe-project-id
+ $ awsmobile init your-unique-project-id
  ```
 
 3. Finally run the app:
