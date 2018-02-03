@@ -38,7 +38,7 @@ import uuid from 'react-native-uuid';
 import mime from 'mime-types';
 
 import { colors } from 'theme';
-import { API, Storage } from 'aws-amplify-react-native';
+import { API, Storage } from 'aws-amplify';
 import files from '../Utils/files';
 import awsmobile from '../aws-exports';
 import DatePicker from '../Components/DatePicker';

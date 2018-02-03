@@ -13,7 +13,7 @@
 import React from 'react';
 
 import LocalStorage from '../../LocalStorage';
-import { Auth } from 'aws-amplify-react-native';
+import { Auth } from 'aws-amplify';
 
 /**
  * @param {React.Component} WrappedComponent 

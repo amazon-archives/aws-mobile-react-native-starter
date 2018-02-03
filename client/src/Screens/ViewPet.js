@@ -18,7 +18,7 @@ import {
   Image,
 } from 'react-native';
 import { colors } from 'theme';
-import { Storage } from 'aws-amplify-react-native';
+import { Storage } from 'aws-amplify';
 
 class ViewPet extends React.PureComponent {
   static navigationOptions = ({ navigation, screenProps }) => console.log(screenProps) || ({
