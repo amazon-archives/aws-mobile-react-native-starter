@@ -38,7 +38,7 @@ function WithAuth(WrappedComponent) {
       await LocalStorage.init();
       let session;
       try {
-        session = await Auth.currentAuthenticatedUser();
+        session = await Auth.currentSession();
       } catch (err) {
         console.log(err);
         session = null;
