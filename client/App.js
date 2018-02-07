@@ -16,7 +16,7 @@ import React from 'react';
 import { DrawerNavigator } from 'react-navigation';
 
 import { WithAuth } from './lib/Categories/Auth/Components';
-import Amplify from 'aws-amplify-react-native';
+import Amplify from 'aws-amplify';
 import awsmobile from './src/aws-exports';
 import First from './src/Screens/First';
 import Splash from './src/Screens/Splash';

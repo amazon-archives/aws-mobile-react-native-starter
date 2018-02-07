@@ -120,7 +120,10 @@ npm run eject # Eject as "React Native"
 
 2. Install additional dependencies:
 
-```npm install aws-amplify-react-native --save```
+```
+npm install aws-amplify --save
+npm install aws-amplify-react-native --save
+```
 
 3. Link the native components by running: `react-native link`
 
@@ -128,6 +131,7 @@ npm run eject # Eject as "React Native"
 
 5. Import the `Auth` module from the library and your aws-exports here
 ```javascript
+import Amplify from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import {awsmobile} from './aws-exports';
 ```

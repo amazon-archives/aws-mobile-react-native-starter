@@ -28,7 +28,7 @@ import {
 import { StackNavigator } from 'react-navigation';
 
 import MFAPrompt from '../../lib/Categories/Auth/Components/MFAPrompt';
-import { Auth } from 'aws-amplify-react-native';
+import { Auth } from 'aws-amplify';
 import Constants from '../Utils/constants';
 import { colors } from 'theme';
 
