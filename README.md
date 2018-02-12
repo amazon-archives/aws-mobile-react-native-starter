@@ -40,41 +40,16 @@ AWS Services used:
 
 ## Getting Started <a name="getstarted"></a>
 
-First clone this repo: `git clone https://github.com/awslabs/aws-mobile-react-native-starter`
-
-## Backend Setup
-1. Set up your AWS resources using AWS Mobile Hub by clicking the button below:
-
-<p align="center">
-  <a target="_blank" href="https://console.aws.amazon.com/mobilehub/home?region=us-east-1#/starterkit/?config=https://github.com/awslabs/aws-mobile-react-native-starter/blob/master/backend/import_mobilehub/reactnative-starter.zip&app=react-native">
-    <span>
-        <img height="100%" src="https://s3.amazonaws.com/deploytomh/button-deploy-aws-mh.png"/>
-    </span>
-  </a>
-</p>
-
-2. Press **Import project**
-3. Note your projects unique ID i.e. "05d550cb-ce2b-426a-a298-deb3c6630e4f". You can see this in the address bar:
-
-https://console.aws.amazon.com/mobilehub/home?region=us-east-1#/**YOUR-UNIQUE-PROJECT-ID-IS-HERE**/build
-
-## Client Setup
-
-If you have already downloaded the `aws-exports.js` and added it to your `./aws-mobile-react-native-starter/client/src`, you can skip steps 1 and 2. 
-
-1. Navigate into `./aws-mobile-react-native-starter/client/src`.
-
-2. Install and configure your mobile client  and run:
-
+1. Create your backend resources and download the sample code inside of my-project folder.
  ```
- $ npm install
- $ npm install -g awsmobile-cli
- $ awsmobile init your-unique-project-id
+ $ awsmobile start my-project react-native
  ```
 
-3. Finally run the app:
+
+2. Finally run the app:
 
    ```
+   $ cd my-project
    $ npm run ios #npm run android
    ```
 
