@@ -41,17 +41,17 @@ AWS Services used:
 ## Getting Started <a name="getstarted"></a>
 
 1. Create your backend resources and download the sample code inside of my-project folder.
- ```
- $ awsmobile start my-project react-native
- ```
+    ```
+    $ awsmobile start my-project react-native
+    ```
 
 
 2. Finally run the app:
 
-   ```
-   $ cd my-project
-   $ npm run ios #npm run android
-   ```
+    ```
+    $ cd my-project
+    $ npm run ios #npm run android
+    ```
 
  Done!
 
