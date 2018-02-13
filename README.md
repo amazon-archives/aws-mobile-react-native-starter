@@ -196,7 +196,7 @@ The `Storage` component requires AWS Credentials to make calls to S3. If you nee
 
 1. Import Storage component from the library
 ```javascript
-import Amplify,{Storage} from 'aws-amplify-react-native'
+import Amplify, { Storage } from 'aws-amplify'
 ```
 
 2. Import the `aws-exports.js` file if you haven't already
