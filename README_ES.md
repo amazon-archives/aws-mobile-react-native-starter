@@ -14,7 +14,7 @@ Este iniciador utiliza el [AWS Amplify JavaScript library](https://github.com/aw
  - [Modificando Cloud Logic with Lambda for your app](#lambdamodify)
 
 ## Vista de arquitectura
-![Architecture](https://s14.postimg.org/k04g59qwx/architecture.png)
+![Architecture](https://s13.postimg.org/c6fim5blz/architecture.png)
 
 Servicios AWS utilizados:
 * Amazon Cognito User Pools
@@ -165,8 +165,8 @@ async function getData() {
 
 7. Ahora puedes invocar APIs en API Gateway desde tu aplicación en React Native que son protegidos vía AWS IAM. Puedes usar otras llamadas REST como se muestra en esta guía [AWS Amplify API component](https://github.com/aws/aws-amplify/blob/master/media/api_guide.md)
 
-### Storing content in the cloud <a name="storage"></a>
-Many applications today provide rich media such as images or videos. Sometimes these are also private to users. AWS Amplify Storage module gives a simple mechanism for managing user content in public or private storage.
+### Almacenando contenido en la nube <a name="storage"></a>
+Muchas aplicaciones el dia de hoy proveen muchos medios tales como imágenes o videos. Algunas veces sin privados para los usuarios. El módulo de almacenamiento AWS Amplify da un mecanismo simple para administrar el almacenamiento del contenido del usuario  público o privado.
 
 El componente `Storage` requiere credenciales AWS para llamar a Amazon S3. Si necesitas almacenar datos en directorios restringidos solo para el usuario, primero necesitarás completar la sección Auth. Porfavor sigue los pasos de la sección anterior [Authentication](#advanced-auth).
 
