@@ -2,12 +2,12 @@
 
 Bootstrap de una aplicación de React Native en AWS. Este iniciador automáticamente provee una infraestructura sin servidor con autenticación, autorización, almacenamiento de imágenes, acceso API y operaciones en la base de datos. También incluye registro de usuario y soporte MFA. El caso de muestra es un "Pet Tracker" El cual después de que un usuario se registra e ingresa pueden subir fotos de sus máscotas al sistema con información tal como su cumpleaño o raza.
 
-Un blod de apoyo para este repositorio se puede encontrar en el Blog AWS Mobile: [Announcing: React Native Starter Project with One-Click AWS Deployment and Serverless Infrastructure](https://aws.amazon.com/blogs/mobile/announcing-react-native-starter-project-with-one-click-aws-deployment-and-serverless-infrastructure/). 
+Un blog de apoyo para este repositorio se puede encontrar en el Blog AWS Mobile: [Announcing: React Native Starter Project with One-Click AWS Deployment and Serverless Infrastructure](https://aws.amazon.com/blogs/mobile/announcing-react-native-starter-project-with-one-click-aws-deployment-and-serverless-infrastructure/). 
 
 Este iniciador utiliza el [AWS Amplify JavaScript library](https://github.com/aws/aws-amplify) para darle soporte en la nube a la aplicaciónto.
 
 ### Enlaces rápidos
- - [Empezando](#empezando)
+ - [Empezando](#Getting-Started)
  - [Uso de los componentes de registro e inicio de sesión en su aplicación](#advanced-auth)
  - [Accediendo a la APIs con REST](#restclient)
  - [Almacenar imágenes, videos y otros contenidos en la nube](#storage)
@@ -90,7 +90,7 @@ npm run eject # Eject as "React Native"
 - Descarga el archivo `aws-exports.js` de tu proyecto AWS MobileHub como se describió anteriormente en la sección [Empezando](#Empexando). Colóquelo en la raíz de su nuevo directorio CRNA.
 
 
-### Autenticación <a name="#Autenticación"></a>
+### Autenticación <a name="#Authentication"></a>
 
 1. Instala dependencias con `npm install`
 
@@ -166,7 +166,7 @@ async function getData() {
 7. Ahora puedes invocar APIs en API Gateway desde tu aplicación en React Native que son protegidos vía AWS IAM. Puedes usar otras llamadas REST como se muestra en esta guía [AWS Amplify API component](https://github.com/aws/aws-amplify/blob/master/media/api_guide.md)
 
 ### Almacenando contenido en la nube <a name="storage"></a>
-Muchas aplicaciones el dia de hoy proveen muchos medios tales como imágenes o videos. Algunas veces sin privados para los usuarios. El módulo de almacenamiento AWS Amplify da un mecanismo simple para administrar el almacenamiento del contenido del usuario  público o privado.
+Muchas aplicaciones el dia de hoy proveen muchos medios tales como imágenes o videos. Algunas veces también son privados para los usuarios. El módulo de almacenamiento AWS Amplify da un mecanismo simple para administrar el almacenamiento del contenido del usuario  público o privado.
 
 El componente `Storage` requiere credenciales AWS para llamar a Amazon S3. Si necesitas almacenar datos en directorios restringidos solo para el usuario, primero necesitarás completar la sección Auth. Porfavor sigue los pasos de la sección anterior [Authentication](#advanced-auth).
 
@@ -185,7 +185,7 @@ import awsmobile from './aws-exports';
 Amplify.configure(awsmobile);
 ```
 
-4. Llama APIs Storage APIs en tu código
+4. Llama APIs Storage en tu código
 ```javascript
 Storage.put('yourFile.txt', 'your key', {
         level: 'private', //access control level
@@ -203,7 +203,7 @@ Para aprender más sobre los componentes UI components y otras llamadas API para
 
 ## Modificando rutas Express en Lambda <a name="lambdamodify"></a>
 
-La muestra de la aplicación invoca una función Lambda ejecutándose [Express](https://expressjs.com) which will make CRUD operations to DynamoDB depending on the route which is passed from the client application. You may wish to modify this backend behavior for your own needs. The steps outline how you could add functionality to _"delete a Pet"_ by showing what modifications would be needed in the Lambda function and the corresponding client modifications to make the request.
+La muestra de la aplicación invoca una función Lambda ejecutándose [Express](https://expressjs.com) que hará que las operaciones CRUD a DynamoDB dependan de la ruta que se pase desde la aplicación del cliente. Es posible que desee modificar este comportamiento de back-end para sus propias necesidades. Los pasos describen cómo podría agregar funcionalidad a _"delete a Pet"_ mostrando qué modificaciones serían necesarias en la función Lambda y las modificaciones correspondientes del cliente para realizar la solicitud.
 
 1. Después de clonar este repo, localiza `./aws-mobile-react-native-starter/backend/lambdas/crud/app.js` y encuentra la siguiente sección en el código:
 
