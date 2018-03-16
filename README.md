@@ -50,7 +50,7 @@ AWS Services used:
 
     ```
     $ cd my-project
-    $ npm i
+    $ npm install
     $ npm run ios #npm run android
     ```
 
