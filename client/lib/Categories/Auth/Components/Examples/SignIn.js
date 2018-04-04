@@ -35,7 +35,7 @@ class SignIn extends React.Component {
       errorMessage: null,
     };
 
-    this.resolver = Promise.resolve();
+    this.resolver = () => null;
 
     this.handleSignIn = this.handleSignIn.bind(this);
     this.doSignIn = this.doSignIn.bind(this);

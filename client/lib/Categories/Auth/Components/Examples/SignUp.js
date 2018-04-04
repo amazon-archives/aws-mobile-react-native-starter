@@ -34,7 +34,7 @@ class SignUp extends React.Component {
       errorMessage: null,
     };
 
-    this.resolver = Promise.resolve();
+    this.resolver = () => null;
 
     this.handleSignUp = this.handleSignUp.bind(this);
     this.doSignUp = this.doSignUp.bind(this);
