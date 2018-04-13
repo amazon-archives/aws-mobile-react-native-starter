@@ -1,5 +1,7 @@
 # AWS Mobile React Native Starter App - Serverless Pet Tracker
 
+**Please submit issues to the [aws-amplify](https://github.com/aws/aws-amplify/issues) repository.**
+
 Bootstrap a React Native application on AWS. This starter automatically provisions a Serverless infrastructure with authentication, authorization, image storage, API access and database operations. It also includes user registration and MFA support. The sample use case is a "Pet Tracker" where after a user registers and logs in they can upload pictures of their pet to the system along with information like the birthday or breed.
 
 A companion blog post for this repository can be found in the AWS Mobile Blog: [Announcing: React Native Starter Project with One-Click AWS Deployment and Serverless Infrastructure](https://aws.amazon.com/blogs/mobile/announcing-react-native-starter-project-with-one-click-aws-deployment-and-serverless-infrastructure/). 
