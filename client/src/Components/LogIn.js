@@ -111,7 +111,7 @@ class LogIn extends React.Component {
     try {
       session = await auth.signIn(username, password)
         .then((data) => {
-          console.log('we get cognitouse:', data),
+          console.log('We get the Cognito User', data),
             this.setState({ cognitoUser: data }),
             showMFAPrompt = true;
           console.log('login mfaRequired');

@@ -34,11 +34,16 @@ export default class MFAPrompt extends React.Component {
 
     this.handleCancel = this.handleCancel.bind(this);
     this.handleValidateMFACode = this.handleValidateMFACode.bind(this);
+    this._mounted = false;
   }
 
   state = {
     promptTitle: 'Enter code',
     code: '',
+  }
+
+  componentDidMount() {
+    this._mounted = true;
   }
 
   handleCancel() {
@@ -54,13 +59,16 @@ export default class MFAPrompt extends React.Component {
         'Enter code' :
         `${validate} Enter code again`;
 
-      this.setState({
-        promptTitle
-      }, () => {
-        if (validCode) {
-          this.props.onSuccess();
-        }
-      });
+      // no-op to setState on an unmounted component.
+      if (this._mounted) {
+        this.setState({
+          promptTitle
+        }, () => {
+          if (validCode) {
+            this.props.onSuccess();
+          }
+        });
+      }
     } catch (err) {
       this.setState({ promptTitle: `${err.message} Enter code again` });
     }
