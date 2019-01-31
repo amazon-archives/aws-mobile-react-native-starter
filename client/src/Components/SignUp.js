@@ -122,7 +122,7 @@ class SignUp extends React.Component {
   }
 
   onPhoneSubmit(event) {
-    const isValidPhone = this.checkPhonePattern(event.nativeEvent.text);
+    const isValidPhone = this.checkPhonePattern(this.state.phoneNumber);
 
     this.setState({ errorMessage: !isValidPhone && 'Please enter a phone number with the format +(countrycode)(number) such as +12223334444' });
   }
