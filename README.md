@@ -62,7 +62,7 @@ AWS Services used:
 
 1. On a phone or emulator/simulator, open the application
 2. Select the **SIGN UP** tab in the lower right to register a new user. You will be prompted to enter a valid email and phone number to confirm your registration.
-3. Click **Sign Up** and you will recieve a code via SMS. Enter this into the prompt and press **OK**.
+3. Click **Sign Up** and you will receive a code via SMS. Enter this into the prompt and press **OK**.
 3. From the **Sign In** tab of the application enter the _Username_ and _Password_ of the user you just registered and select **SIGN IN**.
 4. A code will be sent via SMS. Enter that code in the prompt and press **OK**.
 
